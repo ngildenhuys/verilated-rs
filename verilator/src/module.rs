@@ -2,8 +2,8 @@ use fnv::FnvHashSet;
 
 use std::env;
 use std::fs::File;
-use std::io::BufWriter;
 use std::io::prelude::*;
+use std::io::BufWriter;
 use std::path::{Path, PathBuf};
 
 use syn::punctuated::Punctuated;
@@ -82,7 +82,8 @@ impl ModuleGenerator {
         println!("{} items", ast.items.len());
 
         // Prep the code generator
-        let out_dir = self.out_dir
+        let out_dir = self
+            .out_dir
             .clone()
             .unwrap_or_else(|| PathBuf::from(env::var_os("OUT_DIR").unwrap()));
 
@@ -450,11 +451,13 @@ fn find_module_attrs(attr: &Attribute) -> Vec<String> {
     let mut acc = Vec::new();
     if let Some(meta) = attr.interpret_meta() {
         match meta {
-            Meta::List(ref list) if meta.name() == "module" => for item in &list.nested {
-                if let NestedMeta::Meta(Meta::Word(ref ident)) = item {
-                    acc.push(ident.to_string())
+            Meta::List(ref list) if meta.name() == "module" => {
+                for item in &list.nested {
+                    if let NestedMeta::Meta(Meta::Word(ref ident)) = item {
+                        acc.push(ident.to_string())
+                    }
                 }
-            },
+            }
             _ => {}
         }
     }
