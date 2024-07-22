@@ -11,7 +11,7 @@ module counter(
 
     output [3:0] count_o;
     reg [3:0]    count_o;
-   
+
     always @(posedge clk_i)
       begin
         if (rst_i == 1'b1) begin
@@ -21,5 +21,5 @@ module counter(
             count_o <= count_o + 1;
         end
     end
-   
+
 endmodule

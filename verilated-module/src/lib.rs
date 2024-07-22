@@ -19,7 +19,7 @@ pub fn module(_: TokenStream, input: TokenStream) -> TokenStream {
                 include!(concat!(env!("OUT_DIR"), #src));
             }
         }
-        Err(..) => quote!{},
+        Err(..) => quote! {},
     };
 
     expanded.into()
