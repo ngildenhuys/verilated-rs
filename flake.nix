@@ -69,6 +69,7 @@
           buildInputs = self.checks.${system}.pre-commit-check.enabledPackages;
           packages = with nixpkgs.legacyPackages.${system}; [
             svlint
+            verilator
           ];
         };
       });
